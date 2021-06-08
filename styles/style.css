@@ -1,0 +1,52 @@
+:root{
+  --surface1:#ACD8C4;
+  --surface2:#B1EFFB;
+  --surface3:#EDC7BF;
+  --surface4:#CEEFBE;
+
+  --card1:#90CBB0;
+  --card2:#51DAF6;
+  --card3:#D47A68;
+  --card4:#91DA6C;
+
+	--blurb1:#214535;
+	--blurb2:#055261;
+	--blurb3:#502016;
+	--blurb4:#295214;
+}
+
+html {
+  font-size: 24px;
+  font-family: "Open Sans", sans-serif;
+
+  background-color: #134853;
+}
+
+h1 {
+  font-size: 64px;
+  text-align: left;
+  margin: 0px 0px 16px 0px;
+  height: 64px;
+}
+p {
+  font-size: 24;
+  margin: 0;
+}
+
+p::before {
+  font-family: "Material Icons";
+  content: "\e876";
+  margin:0px 16px;
+}
+
+*[class^="card"] {
+  margin: 0;
+  padding: 16px 0px;
+}
+
+*[class^="list"] {
+  margin: 16px;
+  padding: 16px;
+}
+/* *[class^="card"] {
+} */

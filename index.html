@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>A trivial todo web-thingy.</title>
+    <link href="styles/style.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+</head>
+
+<body>
+    <!-- Define Color classes -->
+    <script>
+        for ( i = 1; i <= 4; i++ ) {
+            //Can be made slightly better by making into a map function that applies a lambda like follows ?
+            //      const colorVars=['--surface','--card','--blurb'];
+            //      colorVars.forEach(function(yoyo){});
+            var styleHeading = document.createElement( 'style' );
+            styleHeading.innerHTML = `.list${ i } { background-color: var(--surface${ i });}`;
+            document.body.appendChild( styleHeading );
+
+            var styleCard = document.createElement( 'style' );
+            styleCard.innerHTML = `.card${ i } { background-color: var(--card${ i }); }`;
+            document.body.appendChild( styleCard );
+
+            var styleText = document.createElement( 'style' );
+            styleText.innerHTML = `.title${ i } { color: var(--blurb${ i });}`;
+            document.body.appendChild( styleText );
+        }
+    </script>
+
+
+
+    <div class="list1">
+        <h1 class="title1">Chores</h1>
+        <div class="card1">
+            <p>Poka</p>
+        </div>
+    </div>
+
+    <div class="list2">
+        <h1 class="title2">Work</h1>
+        <div class="card2">
+            <p>Poka</p>
+        </div>
+    </div>
+
+    <div class="list3">
+        <h1 class="title3">Critical</h1>
+        <div class="card3">
+            <p>Poka</p>
+        </div>
+    </div>
+
+    <div class="list4">
+        <h1 class="title4">Misc</h1>
+        <div class="card4">
+            <p>Poka</p>
+        </div>
+    </div>
+</body>
