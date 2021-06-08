@@ -41,10 +41,11 @@ p::before {
 
 *[class^="card"] {
   margin: 0;
-  padding: 16px 0px;
+  padding: 16px 16px;
+  margin: 16px 0px;
 }
 
-*[class^="list"] {
+*[id^="list"] {
   margin: 16px;
   padding: 16px;
 }
