@@ -1,22 +1,22 @@
 <!DOCTYPE html>
+<html lang="en">
 
 <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>A trivial todo web-thingy.</title>
     <link href="styles/style.css" rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-
 </head>
 
 <body>
-
     <!-- Define Color classes -->
     <script>
         for ( i = 1; i <= 4; i++ ) {
-            //Can be made slightly better by making into a map function that applies a lambda like follows ?
+            //Can maybe be made slightly better by making into a map function that applies a lambda like follows ?
             //      const colorVars=['--surface','--card','--blurb'];
             //      colorVars.forEach(function(yoyo){});
             var styleHeading = document.createElement( 'style' );
@@ -24,7 +24,8 @@
             document.body.appendChild( styleHeading );
 
             var styleCard = document.createElement( 'style' );
-            styleCard.innerHTML = `.card${ i } { background-color: var(--card${ i }); }`;
+            styleCard.innerHTML = `.card${ i } { background-color: var(--card${ i });
+          outline: 2px solid var(--blurb${ i });}`;
             document.body.appendChild( styleCard );
 
             var styleText = document.createElement( 'style' );
@@ -33,81 +34,82 @@
         }
     </script>
 
+    <div class="container">
+        <div id="list1">
+            <h1 class="title1">Chores</h1>
+        </div>
+        <div id="list2">
+            <h1 class="title2">Work</h1>
+        </div>
 
-    <div id="list1">
-        <h1 class="title1">Chores</h1>
-    </div>
+        <div id="list3">
+            <h1 class="title3">Critical</h1>
+        </div>
 
-    <div id="list2">
-        <h1 class="title2">Work</h1>
-    </div>
+        <div id="list4">
+            <h1 class="title4">Misc</h1>
+        </div>
+        </ul>
+        <!-- Fetch and draw lists -->
+        <script>
 
-    <div id="list3">
-        <h1 class="title3">Critical</h1>
-    </div>
+            fetch(
+                "https://firestore.googleapis.com/v1/projects/small-todo/databases/(default)/documents/main/pika",
+                { method: 'GET' }
+            ).then( function ( response ) {
+                if ( response.status == 200 ) {
+                    // The API call was successful!
+                    response.json().then( ( data ) => {
+                        function trying( key, value, id ) {
+                            var foo = document.getElementById( `list${ id }` );
 
-    <div id="list4">
-        <h1 class="title4">Misc</h1>
-    </div>
+                            console.log( `key ${ key }` );
+                            console.log( `value ${ value }` );
 
-<!-- Fetch and draw lists -->
-    <script>
+                            var fofo = document.createElement( 'div' )
 
-        fetch(
-    "https://firestore.googleapis.com/v1/projects/small-todo/databases/(default)/documents/main/pika",
-    { method: 'GET' }
-).then( function ( response ) {
-    if(response.status==200){
-    // The API call was successful!
-    response.json().then( ( data ) => {
-        function trying ( key, value,id) {
-            var foo = document.getElementById(`list${id}`);
+                            var bar = document.createElement( 'p' );
+                            var text = document.createTextNode( key );
 
-            console.log( `key ${ key }` );
-            console.log( `value ${ value }` );
-
-            var fofo = document.createElement( 'div' )
-
-            var bar = document.createElement( 'p' );
-            var text = document.createTextNode( key );
-
-            bar.appendChild( text );
-            fofo.appendChild( bar );
-
+                            bar.appendChild( text );
+                            fofo.appendChild( bar );
 
 
 
-            var card = fofo;
-            card.setAttribute( 'class', `card${id}` );
-            foo.appendChild( card );
 
-        }
+                            var card = fofo;
+                            card.setAttribute( 'class', `card${ id }` );
+                            foo.appendChild( card );
 
-        extractList( 'Chores', data, trying );
-        extractList( 'Work', data, trying );
-        extractList( 'Critical', data, trying );
-        extractList( 'Misc', data, trying );
-    } );
-}else{
-            var errorHeading =document.createElement('h3');
-            errorHeading.setAttribute('style','color:white; top:20%; position:absolute; text-align:center; width:100%')
-        errorHeading.textContent="Apologies, but something isn't quite right";
-        document.body.innerHTML="";
-        document.body.appendChild(errorHeading);
+                        }
 
-}
-} )
-    .catch( function ( err ) {
-        // There was an error
-        console.warn( "Something went wrong.", err );
-        var errorHeading =document.createElement('h3');
-        errorHeading.textContent=err;
-        document.body.appendChild(errorHeading);
+                        extractList( 'Chores', data, trying );
+                        extractList( 'Work', data, trying );
+                        extractList( 'Critical', data, trying );
+                        extractList( 'Misc', data, trying );
+                    } );
+                } else {
+                    var errorHeading = document.createElement( 'h3' );
+                    errorHeading.setAttribute( 'style', 'color:white; top:20%; position:absolute; text-align:center; width:100%' )
+                    errorHeading.textContent = "Apologies, but something isn't quite right";
+                    document.body.innerHTML = "";
+                    document.body.appendChild( errorHeading );
 
-    } );
+                }
+            } )
+                .catch( function ( err ) {
+                    // There was an error
+                    console.warn( "Something went wrong.", err );
+                    var errorHeading = document.createElement( 'h3' );
+                    errorHeading.textContent = err;
+                    document.body.appendChild( errorHeading );
+
+                } );
 
 
-    </script>
+        </script>
 
         <script src="scripts/main.js"></script>
 </body>
+
+</html>

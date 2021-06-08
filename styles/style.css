@@ -1,18 +1,18 @@
-:root{
-  --surface1:#ACD8C4;
-  --surface2:#B1EFFB;
-  --surface3:#EDC7BF;
-  --surface4:#CEEFBE;
+:root {
+  --surface1: #acd8c4;
+  --surface2: #b1effb;
+  --surface3: #edc7bf;
+  --surface4: #ceefbe;
 
-  --card1:#90CBB0;
-  --card2:#51DAF6;
-  --card3:#D47A68;
-  --card4:#91DA6C;
+  --card1: #90cbb0;
+  --card2: #51daf6;
+  --card3: #d47a68;
+  --card4: #91da6c;
 
-	--blurb1:#214535;
-	--blurb2:#055261;
-	--blurb3:#502016;
-	--blurb4:#295214;
+  --blurb1: #214535;
+  --blurb2: #055261;
+  --blurb3: #502016;
+  --blurb4: #295214;
 }
 
 html {
@@ -36,13 +36,22 @@ p {
 p::before {
   font-family: "Material Icons";
   content: "\e876";
-  margin:0px 16px;
+  margin: 0px 16px 0 0;
 }
+/* .noIcon ::before {
+  font-family: "Material Icons";
+  content: "\e886";
+  margin: 0px 16px;
+} */
 
 *[class^="card"] {
   margin: 0;
   padding: 16px 16px;
   margin: 16px 0px;
+
+  /* outline-color: black; */
+  /* outline-width: 5px; */
+
 }
 
 *[id^="list"] {
@@ -51,3 +60,15 @@ p::before {
 }
 /* *[class^="card"] {
 } */
+
+.container {
+  /* width: 100%; */
+  /* column-width: 320px; */
+
+  gap: 1;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+
+  /* initial */
+  display: grid;
+  justify-content: center;
+}
