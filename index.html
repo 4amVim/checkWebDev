@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <!-- Define Color classes -->
+    <!-- Define css rulesets-->
     <script>
         for ( i = 1; i <= 4; i++ ) {
             //Can maybe be made slightly better by making into a map function that applies a lambda like follows ?
@@ -25,7 +25,8 @@
 
             var styleCard = document.createElement( 'style' );
             styleCard.innerHTML = `.card${ i } { background-color: var(--card${ i });
-          outline: 2px solid var(--blurb${ i });}`;
+          outline: 2px solid var(--blurb${ i });
+        }`;
             document.body.appendChild( styleCard );
 
             var styleText = document.createElement( 'style' );
@@ -60,33 +61,25 @@
                 if ( response.status == 200 ) {
                     // The API call was successful!
                     response.json().then( ( data ) => {
-                        function trying( key, value, id ) {
-                            var foo = document.getElementById( `list${ id }` );
+                        function createCard( key, value, id ) {
+                            //Get putative list
+                            var list = document.getElementById( `list${ id }` );
 
-                            console.log( `key ${ key }` );
-                            console.log( `value ${ value }` );
+                            //Create its state
+                            var todo = document.createElement( 'p' );
+                            todo.appendChild( document.createTextNode( key ) );
+                            if(!value){
+                            todo.setAttribute('class','noIcon')
+                            }
 
-                            var fofo = document.createElement( 'div' )
-
-                            var bar = document.createElement( 'p' );
-                            var text = document.createTextNode( key );
-
-                            bar.appendChild( text );
-                            fofo.appendChild( bar );
-
-
-
-
-                            var card = fofo;
-                            card.setAttribute( 'class', `card${ id }` );
-                            foo.appendChild( card );
+                            //Draw it
+                            var newCard = document.createElement( 'div' )
+                            newCard.appendChild( todo );
+                            newCard.setAttribute( 'class', `card${ id }` );
+                            list.appendChild( newCard );
 
                         }
-
-                        extractList( 'Chores', data, trying );
-                        extractList( 'Work', data, trying );
-                        extractList( 'Critical', data, trying );
-                        extractList( 'Misc', data, trying );
+                        ['Chores','Work','Critical','Misc'].forEach((_)=>extractList(_,data,createCard));
                     } );
                 } else {
                     var errorHeading = document.createElement( 'h3' );

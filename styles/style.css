@@ -37,12 +37,14 @@ p::before {
   font-family: "Material Icons";
   content: "\e876";
   margin: 0px 16px 0 0;
+  color: white;
 }
-/* .noIcon ::before {
+.noIcon::before {
   font-family: "Material Icons";
-  content: "\e886";
-  margin: 0px 16px;
-} */
+  content: "\e876";
+  margin: 0px 16px 0 0;
+  color: black;
+}
 
 *[class^="card"] {
   margin: 0;
@@ -55,7 +57,7 @@ p::before {
 }
 
 *[id^="list"] {
-  margin: 16px;
+  margin: 16px 0px -4px 0px;
   padding: 16px;
 }
 /* *[class^="card"] {
@@ -64,8 +66,10 @@ p::before {
 .container {
   /* width: 100%; */
   /* column-width: 320px; */
+  margin: 0 16px;
 
-  gap: 1;
+  column-gap: 11px;
+  row-gap: 0px;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
 
   /* initial */
