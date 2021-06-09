@@ -30,7 +30,7 @@
             document.body.appendChild( styleCard );
 
             var styleText = document.createElement( 'style' );
-            styleText.innerHTML = `.title${ i } { color: var(--blurb${ i });}`;
+            styleText.innerHTML = `#title${ i } { color: var(--blurb${ i });}`;
             document.body.appendChild( styleText );
         }
     </script>
@@ -38,66 +38,19 @@
     <!-- Oughta have a little HTML in an HTML file -->
     <div class="container">
         <div id="list1">
-            <h1 class="title1">Chores</h1>
+            <h1 id="title1"  >Chores</h1>
         </div>
         <div id="list2">
-            <h1 class="title2">Work</h1>
+            <h1 id="title2" >Work</h1>
         </div>
         <div id="list3">
-            <h1 class="title3">Critical</h1>
+            <h1 id="title3">Critical</h1>
         </div>
         <div id="list4">
-            <h1 class="title4">Misc</h1>
+            <h1 id="title4">Misc</h1>
     </div>
-    <!-- Fetch and draw lists -->
-    <script>
 
-        fetch(
-            "https://firestore.googleapis.com/v1/projects/small-todo/databases/(default)/documents/main/pika",
-            { method: 'GET' }
-        ).then( function ( response ) {
-            if ( response.status == 200 ) {
-                // The API call was successful!
-                response.json().then( ( data ) => {
-                    function createCard( key, value, id ) {
-                        //Get putative list
-                        var list = document.getElementById( `list${ id }` );
-
-                        //Create its state
-                        var todo = document.createElement( 'p' );
-                        todo.appendChild( document.createTextNode( key ) );
-                        if ( !value ) {
-                            todo.setAttribute( 'class', 'noIcon' )
-                        }
-
-                        //Draw it
-                        var newCard = document.createElement( 'div' )
-                        newCard.appendChild( todo );
-                        newCard.setAttribute( 'class', `card${ id }` );
-                        list.appendChild( newCard );
-
-                    }
-                    lists.forEach( ( _ ) => extractList( _, data, createCard ) );
-                } );
-            } else {
-                var errorHeading = document.createElement( 'h3' );
-                errorHeading.setAttribute( 'style', 'color:white; top:20%; position:absolute; text-align:center; width:100%' )
-                errorHeading.textContent = "Apologies, but something isn't quite right";
-                document.body.innerHTML = "";
-                document.body.appendChild( errorHeading );
-
-            }
-        } )
-            .catch( function ( err ) {
-                // There was an error
-                console.warn( "Something went wrong.", err );
-                var errorHeading = document.createElement( 'h3' );
-                errorHeading.textContent = err;
-                document.body.appendChild( errorHeading );
-            } );
-    </script>
-
-    <script src="scripts/main.js"></script>
+    <script defer src="scripts/main.js"></script>
 </body>
 
 </html>
