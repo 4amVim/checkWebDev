@@ -12,7 +12,7 @@ redraw();
 //! Needs optimization, retrieve from local cache on change
 function redraw () {
     fetch(
-        "https://firestore.googleapis.com/v1/projects/small-todo/databases/(default)/documents/main/pika",
+        "https://firestore.googleapis.com/v1/projects/small-todo-14345/databases/(default)/documents/main/pika",
         { method: 'GET' }
     ).then( function ( response ) {
         if ( response.status == 200 ) {
@@ -145,7 +145,7 @@ function generateUrl ( listName, changing ) {
     //testing
     // return `https://firestore.googleapis.com/v1/projects/small-todo/databases/(default)/documents/trycol/trydoc?updateMask.fieldPaths=${ listName }.%60${ encodeURIComponent( changing ) }%60`;
     //master
-    return `https://firestore.googleapis.com/v1/projects/small-todo/databases/(default)/documents/main/pika?updateMask.fieldPaths=${ listName }.%60${ encodeURIComponent( changing ) }%60`;
+    return `https://firestore.googleapis.com/v1/projects/small-todo-14345/databases/(default)/documents/main/pika?updateMask.fieldPaths=${ listName }.%60${ encodeURIComponent( changing ) }%60`;
 }
 
 
